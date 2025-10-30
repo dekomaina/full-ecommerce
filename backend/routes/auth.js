@@ -4,7 +4,7 @@ const express = require('express'); // Express framework
 const router = express.Router(); // Create a router instance to define routes
 const bcrypt = require('bcryptjs'); // For hashing passwords
 const jwt = require('jsonwebtoken'); // For generating JWT tokens for authentication
-const User = require('../models/User'); // User model is defined in models/User.js
+const User = require('../models/user'); // User model is defined in models/User.js
 
 // Secret key for signing tokens (just for demo)
 const SECRET = "secret123";
