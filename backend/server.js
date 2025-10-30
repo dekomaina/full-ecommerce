@@ -24,7 +24,7 @@ app.use(bodyParser.json());      // parse incoming JSON data
 
 
 //mongodb+srv://deckotronix21_db_user:Deko#202727#@ecommerce.lozyswr.mongodb.net/?appName=ecommerce
-mongoose.connect("mongodb+srv://deckotronix21_db_user:<db_password>@ecommerce.lozyswr.mongodb.net/?appName=ecommerce", {
+mongoose.connect("mongodb+srv://deckotronix21_db_user:<Deko#202727#>@ecommerce.lozyswr.mongodb.net/?appName=ecommerce", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
