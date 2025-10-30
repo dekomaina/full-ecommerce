@@ -8,8 +8,8 @@ const axios = require("axios");
 const router = express.Router();
 
 // 🔑 Credentials (from Safaricom Developer Portal)
-const consumerKey = "VnJ4yppXZA7fMGKFV4ZOMvLpkaDwdiUNcACevALowAtakByj";
-const consumerSecret = "QEzqMZdHGWsYtJVaIu8r3SuY9Dyu985fNGY7hE6bmEGSXAkdugv2V9cmmzPUwyE2";
+const consumerKey = "aS6bi64dQoKv4NZus89FyvSGek0Rj9ikWt2u0oSmavNgAbxm";
+const consumerSecret = "yyomtF6hsNmTHf2JAgD0uVJeZmitD0LjNcpEqKvYA7NZ6Ktli0HrHfi6yyJwpdth";
 const shortcode = "174379"; // Lipa Na M-Pesa sandbox shortcode
 const passkey = "bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919";
 
