@@ -23,17 +23,13 @@ app.use(bodyParser.json());      // parse incoming JSON data
 // (Make sure MongoDB is running locally or use MongoDB Atlas)
 
 
-//mongodb+srv://deckotronix21_db_mongodb+srv://deckotronix21_db_user:Deko12345@ecommerce.lozyswr.mongodb.net/?appName=ecommerceuser:Deko#202727#@ecommerce.lozyswr.mongodb.net/?appName=ecommerce
-mongoose.connect(
-  "mongodb+srv://deckotronix21_db_user:Deko12345@ecommerce.lozyswr.mongodb.net/ecommerce?retryWrites=true&w=majority",
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  }
-)
-.then(() => console.log("✅ Connected to MongoDB"))
-.catch((err) => console.log("❌ MongoDB connection error:", err));
 
+mongoose.connect("mongodb://localhost:27017/simpleEcom2", {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+.then(() => console.log("✅ Connected to MongoDB"))
+.catch(err => console.log("❌ MongoDB connection error:", err));
 
 // ----------------------------
 // ROUTES
