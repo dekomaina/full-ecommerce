@@ -14,7 +14,7 @@ function App() {
   // ✅ Load products when the app starts
   useEffect(() => {
     axios
-      .get("http://localhost:5000/simple-ecom/products")
+      .get("https://full-ecommerce-1.onrender.com/simple-ecom/products")
       .then((res) => setProducts(res.data))
       .catch((err) => console.log(err));
   }, []);
@@ -27,7 +27,7 @@ function App() {
   // ➕ Add new product
   const addProduct = () => {
     axios
-      .post("http://localhost:5000/simple-ecom/products", form)
+      .post("https://full-ecommerce-1.onrender.com/simple-ecom/products", form)
       .then(() => {
         alert("✅ Product added!");
         window.location.reload();
@@ -38,7 +38,7 @@ function App() {
   // 📲 M-Pesa payment handler
   const payWithMpesa = (price) => {
     axios
-      .post("http://localhost:5000/mpesa/stkpush", {
+      .post("https://full-ecommerce-1.onrender.com/mpesa/stkpush", {
         phone: "254743524067", // your number in format 2547xxxxxxx
         amount: price,
       })
