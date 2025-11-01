@@ -1,0 +1,26 @@
+# Render service definitions for this repo
+# Backend (Node.js Express) will be deployed as a Web Service on Render.
+# NOTE: This file references secrets by name. Create corresponding Render
+# Secrets in the Render dashboard (or via CLI) and map them to these names.
+
+services:
+  - type: web
+    name: simple-ecom-backend
+    env: node
+    plan: free
+    region: oregon
+    branch: main
+    # The service's root is the backend folder. Render will run the build/start commands
+    buildCommand: "cd backend && npm install"
+    startCommand: "cd backend && npm start"
+    envVars:
+      - key: MONGO_URI
+        fromSecret: MONGO_URI
+      - key: JWT_SECRET
+        fromSecret: JWT_SECRET
+      - key: MPESA_API_KEY
+        fromSecret: MPESA_API_KEY
+      - key: MPESA_API_SECRET
+        fromSecret: MPESA_API_SECRET
+      - key: NODE_ENV
+        value: production

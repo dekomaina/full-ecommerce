@@ -1,54 +1,61 @@
 // server.js
-// ----------------------------
-// Basic Node + Express server
-// ----------------------------
+// --------------------------------------
+// 🌍 Node + Express + MongoDB + M-Pesa Server
+// --------------------------------------
 
-// Import required libraries
 const express = require("express");
 const mongoose = require("mongoose");
-const cors = require("cors"); // allows frontend (React) to talk to backend
+const cors = require("cors");
 const bodyParser = require("body-parser");
+require("dotenv").config();
 
 const app = express();
 
-// ----------------------------
-// MIDDLEWARE SETUP
-// ----------------------------
-app.use(cors());                 // allow requests from React
-app.use(bodyParser.json());      // parse incoming JSON data
+// --------------------------------------
+// 🔧 Middleware
+// --------------------------------------
+// Configure CORS: allow restricting to a single origin via CLIENT_ORIGIN env var.
+// If CLIENT_ORIGIN is not set, fall back to allowing all origins (useful for quick deploys/tests).
+const clientOrigin = process.env.CLIENT_ORIGIN;
+if (clientOrigin) {
+  app.use(cors({ origin: clientOrigin }));
+  console.log(`CORS restricted to: ${clientOrigin}`);
+} else {
+  app.use(cors());
+  console.log("CORS: allowing all origins (set CLIENT_ORIGIN in production to restrict).");
+}
 
-// ----------------------------
-// CONNECT TO MONGODB
-// ----------------------------
-// (Make sure MongoDB is running locally or use MongoDB Atlas)
+app.use(bodyParser.json());
 
+// --------------------------------------
+// 🗄️ Connect to MongoDB Atlas
+// --------------------------------------
+mongoose
+  .connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => console.log("✅ MongoDB Atlas Connected"))
+  .catch((err) => console.error("❌ MongoDB connection error:", err));
 
-
-mongoose.connect("mongodb://localhost:27017/simpleEcom2", {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
-.then(() => console.log("✅ Connected to MongoDB"))
-.catch(err => console.log("❌ MongoDB connection error:", err));
-
-// ----------------------------
-// ROUTES
-// ----------------------------
-// Import routes for auth and products
+// --------------------------------------
+// 🧩 Routes
+// --------------------------------------
 const authRoutes = require("./routes/auth");
 const productRoutes = require("./routes/products");
-
-app.use("/simple-ecom/auth", authRoutes); // use the auth routes
-app.use("/simple-ecom/products", productRoutes);
-
-
-// The mpesa route
 const mpesaRoutes = require("./routes/mpesa_stk");
+
+app.use("/simple-ecom/auth", authRoutes);
+app.use("/simple-ecom/products", productRoutes);
 app.use("/mpesa", mpesaRoutes);
 
+// Default route (for health check)
+app.get("/", (req, res) => {
+  res.send("✅ Backend is running successfully on Render!");
+});
 
-// ----------------------------
-// START SERVER
-// ----------------------------
-const PORT = 5000;
+// --------------------------------------
+// 🚀 Start Server
+// --------------------------------------
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));

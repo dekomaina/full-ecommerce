@@ -13,7 +13,7 @@ function App() {
 
   // Fetch all products when page loads
   useEffect(() => {
-    axios.get("http://localhost:5000/simple-ecom/products")
+    axios.get("https://full-ecommerce-1.onrender.com/simple-ecom/products")
       .then(res => setProducts(res.data))
       .catch(err => console.log(err));
   }, []);
@@ -25,7 +25,7 @@ function App() {
 
   // Add product
   const addProduct = () => {
-    axios.post("http://localhost:5000/simple-ecom/products", form)
+    axios.post("https://full-ecommerce-1.onrender.com/simple-ecom/products", form)
       .then(() => {
         alert("Product added!");
         window.location.reload(); // refresh list
